@@ -1,0 +1,15 @@
+global {
+  scrape_interval: "15s"
+  evaluation_interval: "15s"
+  labels: {
+    label: {
+      name: "monitor"
+      value: "rancher-metrics"
+    }
+  }
+}
+job: {
+  name: "prometheus"
+  scrape_interval: "5s"
+  target_group: {
+    # These endpoints are scraped via HTTP.
