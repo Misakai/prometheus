@@ -7,6 +7,8 @@ echo "  }" >> /tmp/prometheus.conf.template
 echo "}" >> /tmp/prometheus.conf.template
 mv /tmp/prometheus.conf.template /etc/prometheus/prometheus.yml
 
+cat /etc/prometheus/prometheus.yml
+
 /bin/prometheus \
   -config.file=/etc/prometheus/prometheus.yml \
   -storage.local.path=/prometheus \
