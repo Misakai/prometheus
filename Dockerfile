@@ -1,5 +1,5 @@
 FROM prom/prometheus
-MAINTAINER Usman Ismail <usman@techtraits.com>
+MAINTAINER Roman Atachiants <roman@emitter.io>
 
 COPY prometheus.conf /etc/prometheus/prometheus.yml
 COPY run-prometheus.sh /bin/run-prometheus.sh
