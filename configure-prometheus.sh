@@ -7,6 +7,6 @@ COUNTER=0
 
 for target in $MONTORING_HOSTS; do 
 	echo "- targets:" > /var/monitors/monitor${COUNTER}.yaml
-	echo "  - ${target}:9104" >> /var/monitors/monitor${COUNTER}.yaml
+	echo "  - ${target}:4001" >> /var/monitors/monitor${COUNTER}.yaml
 	let COUNTER=COUNTER+1 
 done
