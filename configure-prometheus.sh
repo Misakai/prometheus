@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-MONTORING_HOSTS=$(nslookup $1 | tail -n+5 | grep Address | cut -f 3 -d ' ')
-
-mkdir -p /var/monitors/
-COUNTER=0
-
-for target in $MONTORING_HOSTS; do 
-	echo "- targets:" > /var/monitors/monitor${COUNTER}.yaml
-	echo "  - ${target}:4001" >> /var/monitors/monitor${COUNTER}.yaml
-	let COUNTER=COUNTER+1 
+COUNT=$(wget -q -O -"$@" http://rancher-metadata/2015-07-25/hosts | tail -1 | sed 's/=.*//')
+for (( c=1; c <= COUNT; c++))
+do
+	APP=$(wget -q -O -"$@" http://rancher-metadata/2015-07-25/hosts/$c/labels/app)
+	if [ "$APP" -eq "emitter" ]
+	then
+		target=$(wget -q -O -"$@" http://rancher-metadata/2015-07-25/hosts/$c/agent_ip)
+		echo "- targets:" > /var/monitors/monitor${c}.yaml
+		echo "  - ${target}:4001" >> /var/monitors/monitor${c}.yaml
+	fi
 done
